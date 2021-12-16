@@ -19,10 +19,26 @@
 ## How to remove these data-test properties from production code
 
 -   Most likely you dont want a bunch of testing attributes and code as part of your production code deployed
+
     -   https://www.npmjs.com/package/babel-plugin-react-remove-properties
     -   **npm install --save-dev babel-plugin-react-remove-properties**
     -   this plugin babel-plugin-react-remove-properties allows you to remove targeted properties and keywords from your production code prior to shipping
     -   # requires npm run eject
+    -   We need to eject from CRA (create-react-app) to change the Babel settings
+    -   Change package.json babel settings
+
+              "babel": {
+                  "env": {
+                  "production": {
+                    "plugins": [
+                      ["react-remove-properties", {"properties": ["data-test"]}]
+                    ]
+                  }
+                },
+                  "presets": [
+                    "react-app"
+                  ]
+                }
 
 ## Branches
 
