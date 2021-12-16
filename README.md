@@ -1,8 +1,9 @@
 # Click Counter
 
-### A very basic app to demonstrate React TDD
+### A very basic app to demonstrate React TDD using Enzyme for testing
 
-**npm install --save-dev enzyme @wojtekmaj/enzyme-adapter-react-17**
+-   ## Install Enzyme and Enzyme adapter
+    **npm install --save-dev enzyme @wojtekmaj/enzyme-adapter-react-17**
 
 # data-test attributes
 
@@ -15,12 +16,13 @@
         -   **data-test** attributes is **only** used in testing, has no other function or purpose
             -   This protects both testing and production environments by keeping them cleanly separated
 
-# How to remove these data-test properties from production code
+## How to remove these data-test properties from production code
 
 -   Most likely you dont want a bunch of testing attributes and code as part of your production code deployed
     -   https://www.npmjs.com/package/babel-plugin-react-remove-properties
     -   **npm install --save-dev babel-plugin-react-remove-properties**
     -   this plugin babel-plugin-react-remove-properties allows you to remove targeted properties and keywords from your production code prior to shipping
+    -   # requires npm run eject
 
 ## Branches
 
