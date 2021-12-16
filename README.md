@@ -40,6 +40,58 @@
                   ]
                 }
 
+    -   then **npm run build** to make a production build
+    -   then **serve -s build**
+    -   If you inspect the components or elements you will see that "data-test" properties have been removed from the production build - **NOTE**: This appears to work only on Chrome, the data-test attributes still appear on inspect in Mozilla
+
+# Strategies and Design Decisions
+
+-   DRY = Dont Repeat Yourself
+-   Goals for test code are _NOT_ the same as for production code
+-   Want failing tests to be easy to diagnose
+-   Sometimes this means repeating code
+-   Balance between DRY and not repeating your tests
+
+# Use only one expect statement per test
+
+-   Obviously matter of preference and there are cases where its ok, but the more expect statements per single test the more assumptions you are making that the tester understands the code base well and there are not multiple dependencies, functions, variables for each of the expect statements.
+-   Test descriptions provide better documentation
+-   Failure counts give better indication of state of code
+    -   **Tests stop at first failure**
+        -   There is no way to know up front if your test with 10 expect statements is failing on the first expect or the last expect - in an ongoing development environment this test could quickly get out of spec and perhaps even derail development if the tests were ignored for critical dependencies
+-   Can use `beforeEach()` for common setup code to be run before each test
+
+# Testing this Application
+
+-   Test text is actually displayed on the page
+    -   Text displayed, not State
+    -   Testing behavior, not implementation
+-   The plan: counter value will be in a <span>
+    -   data-test attribute "count"
+    -   Test that value is initially 0
+-   use Enzyme `.text()` method
+
+    -   used to text what the value is in the span that contains our count
+
+-   ## Don't `find` too early
+
+    -   Elements are unreliable after wrapper has changed
+    -   Do this:
+
+        const button = findByTestAttr(wrapper, "increment-button");
+        button.simulate("click");
+
+        const count = findByTestAttr(wrapper, "count").text();
+        expect(count).toBe("1");
+
+    -   **NOT** this:
+
+            const button = findByTestAttr(wrapper, "increment-button");
+            button.simulate("click");
+
+            button.simulate('click');
+            expect(count).toBe("1");
+
 ## Branches
 
 -   `master`
