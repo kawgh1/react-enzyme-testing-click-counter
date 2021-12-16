@@ -2,6 +2,16 @@
 
 ### A very basic app to demonstrate React TDD using Enzyme for testing
 
+## Quick Notes
+
+-   Set up a very simple React app with Jest and Enzyme
+-   Used Enzyme's `shallow()` function to render a component
+-   Tested that required DOM elements are rendered using `find()`
+-   Used Enzyme's `.text()` method to extract the text of a React element
+-   Used `simulate` to interact with rendered elements (clicked button)
+-   Tested component for updates after interaction
+-   Created reusable `setup()` and `findByTestAttr()` functions
+
 -   ## Install Enzyme and Enzyme adapter
     **npm install --save-dev enzyme @wojtekmaj/enzyme-adapter-react-17**
 
@@ -87,7 +97,7 @@
     -   **NOT** this:
 
             const button = findByTestAttr(wrapper, "increment-button");
-            button.simulate("click");
+            const count = findByTestAttr(wrapper, "count").text();
 
             button.simulate('click');
             expect(count).toBe("1");
