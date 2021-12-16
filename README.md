@@ -78,11 +78,11 @@
     -   Elements are unreliable after wrapper has changed
     -   Do this:
 
-        const button = findByTestAttr(wrapper, "increment-button");
-        button.simulate("click");
+            const button = findByTestAttr(wrapper, "increment-button");
+            button.simulate("click");
 
-        const count = findByTestAttr(wrapper, "count").text();
-        expect(count).toBe("1");
+            const count = findByTestAttr(wrapper, "count").text();
+            expect(count).toBe("1");
 
     -   **NOT** this:
 
